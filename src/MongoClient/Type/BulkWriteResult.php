@@ -34,11 +34,11 @@ class BulkWriteResult implements Unserializable
 
     public function bsonUnserialize(array $data): void
     {
-        $this->matchedCount = $data['matchedcount'];
-        $this->modifiedCount = $data['modifiedcount'];
-        $this->upsertedCount = $data['upsertedcount'];
-        $this->deletedCount = $data['deletedcount'];
-        $this->insertedCount = $data['insertedcount'];
+        $this->matchedCount = (int) $data['matchedcount'];
+        $this->modifiedCount = (int) $data['modifiedcount'];
+        $this->upsertedCount = (int) $data['upsertedcount'];
+        $this->deletedCount = (int) $data['deletedcount'];
+        $this->insertedCount = (int) $data['insertedcount'];
         $this->upsertedIds = (array) $data['upsertedids'];
     }
 

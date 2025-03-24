@@ -27,9 +27,9 @@ class UpdateResult implements Unserializable
 
     public function bsonUnserialize(array $data): void
     {
-        $this->matchedCount = $data['matchedcount'];
-        $this->modifiedCount = $data['modifiedcount'];
-        $this->upsertedCount = $data['upsertedcount'];
+        $this->matchedCount = (int) $data['matchedcount'];
+        $this->modifiedCount = (int) $data['modifiedcount'];
+        $this->upsertedCount = (int) $data['upsertedcount'];
         $this->upsertedId = $data['upsertedid'];
     }
 

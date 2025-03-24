@@ -20,7 +20,7 @@ class DeleteResult implements Unserializable
 
     public function bsonUnserialize(array $data): void
     {
-        $this->n = $data['n'];
+        $this->n = (int) $data['n'];
     }
 
     public function getDeletedCount(): int

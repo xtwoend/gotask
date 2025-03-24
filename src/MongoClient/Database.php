@@ -14,7 +14,7 @@ namespace Hyperf\GoTask\MongoClient;
 
 use Hyperf\Contract\ConfigInterface;
 
-use function MongoDB\BSON\fromPHP;
+
 use function MongoDB\BSON\toPHP;
 
 class Database
@@ -46,10 +46,10 @@ class Database
             'Command' => $this->sanitize($command),
             'Opts' => $this->sanitizeOpts($opts),
         ];
-        $result = $this->mongo->runCommand(fromPHP($payload));
+        $result = $this->mongo->runCommand(\MongoDB\BSON\Document::fromPHP($payload)->__toString());
         if ($result !== '') {
             $typeMap = $opts['typeMap'] ?? $this->typeMap;
-            return toPHP($result, $typeMap);
+            return \MongoDB\BSON\Document::fromBSON($result)->toPHP($typeMap);
         }
         return '';
     }
@@ -61,10 +61,10 @@ class Database
             'Command' => $this->sanitize($command),
             'Opts' => $this->sanitizeOpts($opts),
         ];
-        $result = $this->mongo->runCommandCursor(fromPHP($payload));
+        $result = $this->mongo->runCommandCursor(\MongoDB\BSON\Document::fromPHP($payload)->__toString());
         if ($result !== '') {
             $typeMap = $opts['typeMap'] ?? $this->typeMap;
-            return toPHP($result, $typeMap);
+            return \MongoDB\BSON\Document::fromBSON($result)->toPHP($typeMap);
         }
         return '';
     }
